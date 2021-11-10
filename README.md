@@ -43,14 +43,20 @@ JNDI是Java Naming and Directory Interface（JAVA命名和目录接口）的英�
 - getType       获取给定bean的类型
 - getAliases    获取给定bean的别名
 
-
+![](https://github.com/XXXLRC/Spring-framework/blob/e81a880690071250e8f478b0a4612b4b6507d8e3/images/202111100000001.png)
 
 BeanFactory的四级体系结构：
+
 |-- BeanFactory 是Spring bean容器的根接口.提供获取bean,是否包含bean,是否单例与原型,获取bean类型,bean 别名的api.
+
 |-- -- ListableBeanFactory 提供容器内bean实例的枚举功能.不考虑父容器内的实例.这是设计模式原则里的接口隔离原则。
+
 |-- -- AutowireCapableBeanFactory 提供工厂的装配功能。
+
 |-- -- HierarchicalBeanFactory 提供父容器的访问功能
+
 |-- -- -- ConfigurableBeanFactory 如名可配置工厂,提供factory的可配置功能
+
 |-- -- -- -- ConfigurableListableBeanFactory 集大成者，在ConfigurableBeanFactory基础上,提供解析,修改bean定义,并初始化单例的功能
 
 二级容器
@@ -96,6 +102,7 @@ HierarchicalBeanFactory中定义的方法：
 三级容器
 ConfigurableBeanFactory
 
+![](https://github.com/XXXLRC/Spring-framework/blob/e81a880690071250e8f478b0a4612b4b6507d8e3/images/2021111000000002.png)
 
 
 
