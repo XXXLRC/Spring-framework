@@ -47,7 +47,7 @@ JNDI是Java Naming and Directory Interface（JAVA命名和目录接口）的英�
 
 BeanFactory的四级体系结构：
 
-![](https://github.com/XXXLRC/Spring-framework/blob/ea40c7208311017b6fdd0fdb15b47ea971139201/images/2021111000003.png)
+![](https://github.com/XXXLRC/Spring-framework/blob/8784c3407d3ec974662019939f0df6475bcd6584/images/2021111000003.png)
 
 |-- BeanFactory 是Spring bean容器的根接口.提供获取bean,是否包含bean,是否单例与原型,获取bean类型,bean 别名的api.
 
