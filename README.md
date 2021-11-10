@@ -9,7 +9,8 @@ Overview of the Spring Framework
 - 为代码质量设定高标准。Spring框架强调有意义的，当前的和准确的javadoc。它是极少数项目之一，可以声称干净的代码结构，包之间没有循环依赖。
 
 Spring框架由大约20个模块组成的特性组成。这些模块分为核心容器、数据访问/集成、Web、AOP（面向方面编程）、工具、消息传递和测试，如下图所示。
-![]()
+
+![](https://github.com/XXXLRC/Spring-framework/blob/bd08c2c4864830bb62712f901989471733434d01/images/spring-overview.png)
 
 **核心容器**
 
@@ -21,6 +22,6 @@ Context（spring context）模块构建在Core和bean模块提供的坚实基础
 
 spring-expression模块提供了一种强大的表达式语言，用于在运行时查询和操作对象图。它是JSP2.1规范中指定的统一表达式语言（unified EL）的扩展。该语言支持设置和获取属性值、属性分配、方法调用、访问数组内容、集合和索引器、逻辑和算术运算符、命名变量以及从Spring的IoC容器中按名称检索对象。它还支持列表投影和选择以及常见的列表聚合。
 
-Bean在Spring中就是一个个业务组件，我们通过使用各种Bean来完成最终的业务逻辑功能。Bean的创建和装配交个Spring容器来完成，这叫做控制翻转。
+Bean：在Spring中，构成应用程序主干并由SpringIOC容器管理的对象称为bean。bean是由SpringIOC容器实例化、组装和管理的对象。bean以及它们之间的依赖关系反映在容器使用的配置元数据中。
 
 JNDI是Java Naming and Directory Interface（JAVA命名和目录接口）的英文简写，它是为JAVA应用程序提供命名和目录访问服务的API（Application Programing Interface，应用程序编程接口）。JNDI 是一个sun提出的一个规范(相似于jdbc)，详细的实现是各个j2ee容器提供商。JNDI是J2EE组件在执行时间接地查找其它组件、资源或服务的通用机制，可实现组件之间的解耦。JNDI 是通过资源的名字来查找的，资源的名字在整个j2ee应用中(j2ee容器中)是唯一的。 
