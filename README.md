@@ -104,6 +104,94 @@ HierarchicalBeanFactory中定义的方法：
 三级容器
 ConfigurableBeanFactory
 
+ConfigurableBeanFactory同时继承了HierarchicalBeanFactory 和 SingletonBeanRegistry 这两个接口，即同时继承了分层Factory和单例类注册的功能(还有HierarchicalBeanFactory的父接口BeanFactory的功能)。
+
+具体：
+1. 2个静态不可变常量分别代表单例类和原型类。
+```
+String SCOPE_SINGLETON = "singleton";
+String SCOPE_PROTOTYPE = "prototype";
+```
+
+2. 1个设置父工厂的方法，跟HierarchicalBeanFactory接口的getParentBeanFactory方法互补。
+```
+void setParentBeanFactory(BeanFactory parentBeanFactory) throws IllegalStateException;
+```
+
+3. 4个跟类加载器有关的方法：get/set工厂类加载器和get/set临时类加载器。
+```
+void setBeanClassLoader(@Nullable ClassLoader beanClassLoader);
+ClassLoader getBeanClassLoader();
+void setTempClassLoader(@Nullable ClassLoader tempClassLoader);
+ClassLoader getTempClassLoader();
+```
+
+4. 2个设置、是否缓存元数据的方法（热加载开关）。
+```
+void setCacheBeanMetadata(boolean cacheBeanMetadata);
+boolean isCacheBeanMetadata();
+```
+5. 12个处理Bean注册、加载等细节的方法，包括：Bean表达式分解器、转换服务、属性编辑登记员、属性编辑器、属性编辑注册器、类型转换器、嵌入式的字符串分解器
+```
+void setBeanExpressionResolver(@Nullable BeanExpressionResolver resolver);
+BeanExpressionResolver getBeanExpressionResolver();
+void setConversionService(@Nullable ConversionService conversionService);
+ConversionService getConversionService();
+void addPropertyEditorRegistrar(PropertyEditorRegistrar registrar);
+void registerCustomEditor(Class<?> requiredType, Class<? extends PropertyEditor> propertyEditorClass);
+void copyRegisteredEditorsTo(PropertyEditorRegistry registry);
+void setTypeConverter(TypeConverter typeConverter);
+TypeConverter getTypeConverter();
+void addEmbeddedValueResolver(StringValueResolver valueResolver);
+boolean hasEmbeddedValueResolver();
+String resolveEmbeddedValue(String value);
+```
+
+6. 2个处理Bean后处理器的方法。
+```
+void addBeanPostProcessor(BeanPostProcessor beanPostProcessor);
+int getBeanPostProcessorCount();
+```
+
+7. 3个跟注册范围相关的方法。
+```
+void registerScope(String scopeName, Scope scope);
+String[] getRegisteredScopeNames();
+Scope getRegisteredScope(String scopeName);
+```
+
+8. 1个返回安全访问上下文的方法、1个从其他的工厂复制相关的所有配置的方法。
+```
+AccessControlContext getAccessControlContext();
+void copyConfigurationFrom(ConfigurableBeanFactory otherFactory);
+```
+
+9. 2个跟Bean别名相关的方法、1个返回合并后的Bean定义的方法。
+```
+void registerAlias(String beanName, String alias) throws BeanDefinitionStoreException;
+void resolveAliases(StringValueResolver valueResolver);
+BeanDefinition getMergedBeanDefinition(String beanName) throws NoSuchBeanDefinitionException;
+```
+
+10. 1个判断是否为工厂Bean的方法、2个跟当前Bean创建时机相关的方法。
+```
+boolean isFactoryBean(String name) throws NoSuchBeanDefinitionException;
+void setCurrentlyInCreation(String beanName, boolean inCreation);
+boolean isCurrentlyInCreation(String beanName);
+```
+
+11. 3个跟Bean依赖相关的方法、3个销毁Bean相关的方法。
+```
+void registerDependentBean(String beanName, String dependentBeanName);
+String[] getDependentBeans(String beanName);
+String[] getDependenciesForBean(String beanName);
+void destroyBean(String beanName, Object beanInstance);
+void destroyScopedBean(String beanName);
+void destroySingletons();
+```
+
+总结：这个巨大的工厂接口，继承自HierarchicalBeanFactory 和 SingletonBeanRegistry，并额外独有38个方法，这38个方法包含了工厂创建、注册一个Bean的众多细节。总方法数：自有的38个方法、HierarchicalBeanFactory的2个方法、SingletonBeanRegistry的5个方法、接口BeanFactory的10个方法，共55个方法。
+
 ![](https://github.com/XXXLRC/Spring-framework/blob/e81a880690071250e8f478b0a4612b4b6507d8e3/images/2021111000000002.png)
 
 
