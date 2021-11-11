@@ -195,7 +195,18 @@ void destroySingletons();
 ![](https://github.com/XXXLRC/Spring-framework/blob/e81a880690071250e8f478b0a4612b4b6507d8e3/images/2021111000000002.png)
 
 
+ConfigurableListableBeanFactory继承了ListableBeanFactory, AutowireCapableBeanFactory, ConfigurableBeanFactory。在ConfigurableBeanFactory的基础上，它还提供了分析和修改bean定义以及预实例化单例的工具。所有各级BeanFacotry的方法定义都集成在了ConfigurableListableBeanFactory里，实现ConfigurableListableBeanFactory接口就可以实现所有BeanFactory的方法。
 
+定义接口：
+- void ignoreDependencyType(Class<?> type);//忽略给定的自动装配依赖关系接口。void ignoreDependencyInterface(Class<?> ifc);//忽略给定的自动装配依赖关系接口。
+- void registerResolvableDependency(Class<?> dependencyType, @Nullable Object autowiredValue);//使用相应的自动装配值注册特殊依赖关系类型。
+- boolean isAutowireCandidate(String beanName, DependencyDescriptor descriptor) throws NoSuchBeanDefinitionException;//确定指定的bean是否有资格作为autowire候选者，注入到声明匹配类型依赖关系的其他bean中。
+- BeanDefinition getBeanDefinition(String beanName) throws NoSuchBeanDefinitionException;//返回指定bean的已注册BeanDefinition，允许访问其属性值和构造函数参数值（可以在bean工厂后处理期间修改）。
+- Iterator<String> getBeanNamesIterator();//返回所有bean名称的迭代对象
+- void clearMetadataCache();//清除合并的bean定义缓存，删除尚未被认为有资格进行完整元数据缓存的bean条目。
+- void freezeConfiguration();//冻结所有bean定义，表明注册的bean定义不会被修改或进一步后处理。
+- boolean isConfigurationFrozen();//返回是否冻结此工厂的bean定义
+- void preInstantiateSingletons() throws BeansException;//确保所有非lazy-init单例都被实例化
 
 
 
